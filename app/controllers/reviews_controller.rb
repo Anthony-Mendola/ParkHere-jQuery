@@ -4,9 +4,13 @@ class ReviewsController < ApplicationController
   def create
     @review = current_user.reviews.create(review_params)
     @review.listing = @listing
-    @review.save
+    if @review.save
     render json: @review, status: 201
+    else
+      render json: {errors: @review.errors.full_messages}, status: 400
   end
+end
+
 
 
 
