@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ParkHereJquery</title>
+    <title>ParkHere</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
+    <script type="text/javascript"
+     src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['maps_api_key'] %>">
+     </script>
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+  <%= render 'layouts/navbar' %>
+  <%= render 'layouts/header' %>
+  <div class="container">
+  <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+
+  <%= yield %>
+</div>
+</body>
+  <div class="footer-wrap">
+      <footer>
+        <%= render  "layouts/footer" %>
+      </footer>
+  </div>
+
+
 </html>
