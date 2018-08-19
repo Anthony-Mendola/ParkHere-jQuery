@@ -1,0 +1,89 @@
+.listing-images:hover {
+  cursor: pointer;
+}
+
+.thumbnail {
+  height: 300px;
+}
+
+#navbar-brand {
+  font-family: arial;
+}
+
+#flash-messages {
+  margin-top: 20px;
+}
+
+.devise-links {
+  margin-top: 20px;
+}
+
+#content {
+  margin-top: 50px;
+}
+
+.review-options {
+  margin-left: 20px;
+}
+
+#reviews .card {
+  margin-bottom: 15px;
+}
+
+#reviews {
+  margin-top: 50px;
+}
+
+.nested-fields {
+  margin-bottom: 10px;
+}
+
+.listing-smaller-box {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.listing-types h3,
+.listing-reviews h3 {
+  font-size: 44px;
+  font-family: "Amatic SC", cursive;
+}
+
+.add-type {
+  margin-top: 10px;
+}
+
+.page-wrap {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 10px; /* Should be equal to the height of your footer */
+}
+
+.footer-wrap {
+  width: 100%;
+  position: relative;
+  bottom: 0px;
+}
+
+.form-buttons {
+  input {
+    cursor: pointer;
+  }
+}
+
+.field_with_errors {
+  label {
+    color: red;
+  }
+  .form-control {
+    @extend .is-invalid;
+  }
+}
+
+.ow {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  font-size: 13px;
+}
