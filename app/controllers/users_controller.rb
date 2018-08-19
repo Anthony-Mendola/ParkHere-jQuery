@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def destinations
     if current_user
-      @listingss = current_user.listings
+      @listings = current_user.listings
     end
   end
 
