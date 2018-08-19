@@ -85,7 +85,7 @@ class ListingsController < ApplicationController
     params.require(:listing).permit(:title, :address, :content, :cost, :contact, :image, :longitude,
     :latitude, :category_id, :category_attribute => [:name])
   end
-end
+
 
    #In this line, our set_listing action is running a database query on the
     #Listing model that will return a listing with an ID that matches the route parameters.

@@ -1,7 +1,7 @@
 class Listing < ApplicationRecord
 belongs_to :category
 belongs_to :user
-has_many reviews
+has_many :reviews
 
 geocoded_by :address
 after_validation :geocode

@@ -1,0 +1,36 @@
+<%= form_for(@listing) do |listing_builder| %>
+  <%= render 'shared/error_messages' %>
+  <p>
+    <%= listing_builder.label :title %>
+    <%= listing_builder.text_field :title, class: 'form-control' %><br>
+  </p>
+
+  <p>
+    <%= listing_builder.label :address %>
+    <%= listing_builder.text_field :address, class: 'form-control' %><br>
+  </p>
+
+  <%= listing_builder.fields_for :category do |category_builder| %>
+    <p><strong>Category Name</strong> <%= category_builder.text_field :name, class: 'form-control' %><br></p>
+  <% end %>
+
+  <p>
+    <%= listing_builder.label :content %>
+    <%= listing_builder.text_area :content, rows: 10, class: 'form-control' %><br>
+	</p>
+	
+	<p>
+	<%= listing_builder.label :cost %>
+	<%= listing_builder.text_area :cost, rows: 10, class: 'form-control' %><br>
+</p>
+
+<p>
+<%= listing_builder.label :contact %>
+<%= listing_builder.text_area :contact, rows: 10, class: 'form-control' %><br>
+</p>
+
+  <p><strong>Image</strong><%= listing_builder.text_field :image, as: :file, class: 'form-control' %><br></p>
+
+
+  <%= listing_builder.submit "Create a Listing", class: "btn btn-md btn-primary" %>
+<% end %>
