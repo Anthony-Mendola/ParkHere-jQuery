@@ -12,25 +12,19 @@
 
   <%= listing_builder.fields_for :category do |category_builder| %>
     <p><strong>Category Name</strong> <%= category_builder.text_field :name, class: 'form-control' %><br></p>
+
   <% end %>
 
   <p>
     <%= listing_builder.label :content %>
     <%= listing_builder.text_area :content, rows: 10, class: 'form-control' %><br>
-	</p>
-	
-	<p>
-	<%= listing_builder.label :cost %>
-	<%= listing_builder.text_area :cost, rows: 10, class: 'form-control' %><br>
-</p>
+  </p>
 
-<p>
-<%= listing_builder.label :contact %>
-<%= listing_builder.text_area :contact, rows: 10, class: 'form-control' %><br>
-</p>
+  <p><strong>Contact</strong><%= listing_builder.text_field :contact, class: 'form-control' %><br></p>
 
-  <p><strong>Image</strong><%= listing_builder.text_field :image, as: :file, class: 'form-control' %><br></p>
+  <p><strong>Cost</strong><%= listing_builder.text_field :cost, class: 'form-control' %><br></p>
 
 
-  <%= listing_builder.submit "Create a Listing", class: "btn btn-md btn-primary" %>
+
+  <%= listing_builder.submit "Create Listing", class: "btn btn-md btn-primary" %>
 <% end %>

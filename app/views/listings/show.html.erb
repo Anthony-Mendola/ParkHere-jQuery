@@ -1,76 +1,43 @@
 <div class="container">
-<div class="row">
-  <div class="col-md-4">
+  <div class=" well col-sm-6">
+    <%= render 'shared/error_messages' %>
+    <h3>Listing</h3>
 
-   <div class="thumbnail listingImage">
-    <%= image_tag @listing.image %>
+    <h3>Title: <span class="listingTitle"><%=@listing.title%></span></h3>
+    <p>Written by: <span class="listingUserName"><%= @listing.user.name %></span></p>
+    <p>Location: <span class="listingLocation"><%=@listing.address%></span></p>
+    <p>Category Name: <span class="listingCategoryName"><%= @listing.category %></span></p>
 
 
-    </div>
-    </div>
-    <div class="btn-group" role="group">
-      <div class="form-buttons">
-        <% if owner?(@listing) %>
-          <%= link_to "Edit listing", edit_listing_path(@listing), class: 'btn btn-outline-primary btn-sm'%>
-          <%= link_to "Delete listing", @listing, method: :delete, data: { confirm: "Are you sure you want to delete this listing?"}, class: 'btn btn-outline-danger btn-sm' %>
-        <% end %>
+    <p>Description: <span class="listingContent"><%=@listing.content%></span></p>
+    <p>Recommendations: <span class="listingContact"><%=@listing.contact%></span></p><br>
+
+    <p>Cost: <span class="listingCost"><%=@listing.cost%></span></p>
+
+    <%= link_to "Update Listing", edit_listing_path(@listing), class: "btn btn-info btn-sm dest_button" %><br><br>
+    <%= link_to "Delete Listing", [@listing], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning btn-sm dest_button" %><br><br>
+
+    <% if current_user %>
+      <h4>Add a review:</h4>
+        <%= form_for @review, url: listing_reviews_path(@listing, @review)  do |f| %>
+          <p><strong>Content</strong> <%= f.text_area :content, class: 'reviewBox form-control' %></p>
+          <!-- <%= f.submit "Create Review", class: "btn btn-sm btn-primary" %> -->
+          <button type="submit" class="btn btn-sm btn-primary">Create Review</button>
+        <% end %><br>
+    <% else %>
+      <p>Please log in order to add a review.</p>
+    <% end %>
+    <h4>Reviews:</h4>
+    <div id="submitted-reviews">
+      <% @listing.reviews.each do |review| %>
+      <div class="well well-white" id="review-<%= review.id %>">
+        <strong class="reviewUserName"><%= review.user.name %></strong> says: <span class="reviewContent"><%= review.content %></span>
       </div>
+      <% end %>
     </div>
-    <div class="col-md-8">
-    <h1 class="listingName"><%= @listing.title %></h1>
 
-    <p>Listing Creator: <span class="listingUserName"><%= @listing.user.email %></span></p>
+    <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@listing.id%>">View Previous Listing</a><br><br>
+    <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@listing.id%>">View Next Listing</a><br><br>
+  </div>
 
-    <p><strong>Category</strong><span class="listingCategory"><%= display_listing_categories(@listing.categories) %></span></p>
-
-    <span class="listingCost"><%= number_to_currency @listing.cost %></span>
-    
-    <p><strong>Contact:</strong><br><span class="listingContact"><%= @listing.contact %><span></p>
-
-    <h3>Details</h3>
-    <span class="listingDescription"><%=@listing.content%></span>
-    
-    <br>
-    <a href="#" class="js-previous btn btn-primary btn-sm" data-id="<%=@listing.id%>">Previous Listing</a>
-    
-    <a href="#" class="js-next btn btn-primary btn-sm" data-id="<%=@listing.id%>">Next Listing</a>
-    </div>
-    
-
-  
-<br>
-
-<div class="col-md-12">
-		<h3 class="listingAddress">Location: <%= @listing.address %></h3>
-		<div id="map-container">
-		  <div id="map-canvas"></div>
-		</div>
-	</div>
-
-<%= link_to "<< Back to Listings", root_path, class: 'btn btn-outline-primary btn-small back-to-listing-button'%>
-
-<%= javascript_tag do %>
-	latitude = '<%= j @listing.latitude.to_s %>';
-	longitude = '<%= j @listing.longitude.to_s %>';
-	title = '<%= j @listing.title %>';
-	cost = '<%= j number_to_currency(@listing.cost) %>';
-	address = '<%= j @listing.address %>';
-<% end %>
-
-<div class="container">
-<div class="listing-reviews">
-  <h3>Reviews</h3>
-	<% if user_signed_in? %>
-  <%= render 'reviews/form' %>
-<% end %>
-<br>
-		<div id="submitted-reviews">
-<% @listing.reviews.each do |review| %>
-<div class="rev" id="review-<%= review.id %>">
-	<strong class="reviewUserName"><%= review.user.email %></strong> says: <span class="reviewContent"><%= review.content %></span><br>
-  <span><small><%= review.updated_at.strftime("%e %B %Y %H:%M %p") %></small></span>
-  <br>
-	<br>
-</div>
-<% end %>
 </div>

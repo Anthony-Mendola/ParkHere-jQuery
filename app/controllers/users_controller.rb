@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def destinations
+  def listings
     if current_user
       @listings = current_user.listings
     end

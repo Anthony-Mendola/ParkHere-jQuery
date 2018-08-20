@@ -1,24 +1,33 @@
-# README
+## ParkHere
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Introduction
 
-Things you may want to cover:
+ParkHere is a Ruby on Rails web app that helps make parking easy! You can view listings of available parking spaces and you can sign-up to post your own space for rent..
 
-* Ruby version
+### Usage
 
-* System dependencies
+Clone the repo and then install the needed gems locally:
 
-* Configuration
+```
+$ bundle install
+```
 
-* Database creation
+Migrate the database:
 
-* Database initialization
+```
+$ rails db:migrate
+```
 
-* How to run the test suite
+```
+$ rails server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Contributing
 
-* Deployment instructions
+Bug reports and pull requests are welcome on GitHub at https://github.com/Anthony-Mendola/ParkHere-jQuery. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
-* ...
+## License
+
+MIT License | Copyright (c) 2018 [Anthony Mendola](http://anthonymendola.com)
+
+The app is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

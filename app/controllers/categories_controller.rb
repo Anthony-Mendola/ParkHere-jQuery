@@ -1,6 +1,4 @@
-class CategoriesController < ApplicationController
-  before_action :authenticate_user!
-
+class CategorysController < ApplicationController
   def index
     @categories = Category.all
   end

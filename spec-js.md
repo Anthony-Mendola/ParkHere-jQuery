@@ -3,35 +3,34 @@
 Specs:
 
 - [x] Use jQuery for implementing new requirements
-- [ ] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
-- [ ] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
-- [ ] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
-- [ ] Use your Rails API and a form to create a resource and render the response without a page refresh.
-- [ ] Translate JSON responses into js model objects.
-- [ ] At least one of the js model objects must have at least one method added by your code to the prototype.
+- [x] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
+- [x] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
+- [x] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
+- [x] Use your Rails API and a form to create a resource and render the response without a page refresh.
+- [x] Translate JSON responses into js model objects.
+- [x] At least one of the js model objects must have at least one method added by your code to the prototype.
 
 Confirm
 
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
+- [x] You don't include changes in a commit that aren't related to the commit message
 
 Requirements from README page:
 
-1.  Must render at least one index page (index resource - 'list of things') via jQuery and an Active Model Serialization JSON Backend. For example, in a blog domain with users and posts, you might display the index of the users posts on the users show page, fetching the posts via an AJAX GET request, with the backend rendering the posts in JSON format, and then appending the posts to the page.
-    \*Clicking More Info on the index page on a specific listing, fetches the listing body and loads it.
+1.  Must render at least one index page (index resource - 'list of things') via jQuery and an Active Model Serialization JSON Backend. For example, in a blog domain with users and posts, you might display the index of the users posts on the users show page, fetching the posts via an AJAX GET request, with the backend rendering the posts in JSON format, and then appending the posts to the page. \* On the Listings Index page, I added a "More Info" button that expands a section under each listing to include the full description without redirecting the user to the individual listing. The index page is rendered via jquery and active model serialization backend.
 
 2.  Must render at least one show page (show resource - 'one specific thing') via jQuery and an Active Model Serialization JSON Backend. For example, in the blog domain, you might allow a user to sift through the posts by clicking a 'Next' button on the posts show page, with the next post being fetched and rendered via JQuery/AJAX.
-    \*Once on a listing, "Next" button on the listing show page allows the next post to be fetched and rendered via JQuery/AJAX
+    \*Once on a listing, "Next" and previous button on the listing show page allows the previous/next post to be fetched and rendered via JQuery/AJAX
 
 3.  The rails API must reveal at least one `has-many` relationship in the JSON that is then rendered to the page. For example if each of those posts has many comments, you could render those comments as well on that show page.
-    \*A listing has-many reviews.
+    \*On the index page, a User has many Listings. On the show page, a Listing has many reviews.
 
-4.  Must use your Rails API and a form to create a resource and render the response without a page refresh. For example, a user might be able to add a comment to a post, and the comment would be serialized, and submitted via an AJAX POST request, with the response being the new object in JSON and then appending that new comment to the DOM using JavaScript (ES6 Template Literals can help out a lot with this).
+4)  Must use your Rails API and a form to create a resource and render the response without a page refresh. For example, a user might be able to add a comment to a post, and the comment would be serialized, and submitted via an AJAX POST request, with the response being the new object in JSON and then appending that new comment to the DOM using JavaScript (ES6 Template Literals can help out a lot with this).
     \*Add a review to a listing without a page refresh.
 
-5.  Must translate the JSON responses into Javascript Model Objects. The Model Objects must have at least one method on the prototype. Formatters work really well for this. Borrowing from the previous example, instead of plainly taking the JSON response of the newly created comment and appending it to the DOM, you would create a Comment prototype object and add a function to that prototype to perhaps concatenate (format) the comments authors first and last name. You would then use the object to append the comment information to the DOM.
+5)  Must translate the JSON responses into Javascript Model Objects. The Model Objects must have at least one method on the prototype. Formatters work really well for this. Borrowing from the previous example, instead of plainly taking the JSON response of the newly created comment and appending it to the DOM, you would create a Comment prototype object and add a function to that prototype to perhaps concatenate (format) the comments authors first and last name. You would then use the object to append the comment information to the DOM. \* Review JSON responses are turned into a JavaScript object first. A postReview method was added to the object.
 
 Requirements from Review Checklist form:
 Must have Rails backend and client JS

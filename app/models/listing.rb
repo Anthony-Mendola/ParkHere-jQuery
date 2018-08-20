@@ -1,26 +1,32 @@
 class Listing < ApplicationRecord
-belongs_to :category
-belongs_to :user
-has_many :reviews
+  belongs_to :category
+  belongs_to :user
+  has_many :reviews
+  validates_presence_of :title, :content, :address
 
-geocoded_by :address
-after_validation :geocode
-
-validates :title, :content, :cost, :contact, :image, presence: true
-validates :title, length: { in: 1..90 }
-validates :content, length: { minimum: 10 }
-
-has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>"  }, default_url: "/images/:style/missing.png"
-validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
-
-def self.search(search)
-    if search
-       search = search.downcase
-        where("lower(title) LIKE ?", "%#{search}%")
-    else
-      all
+  def category_attributes=(category_attributes)
+    category_attributes.values.each do |category_attribute|
+      if !category_attribute['name'].blank?
+        category = Category.find_or_create_by(category_attribute)
+        self.categories << category
+      end
     end
   end
 
-
+  def next
+    if next_dest = self.class.where("id > ?", id).first
+      next_dest
+    else
+      Listing.first
     end
+  end
+
+  def previous
+    if previous_dest = self.class.where("id < ?", id).last
+      previous_dest
+    else
+      Listing.last
+    end
+  end
+
+end

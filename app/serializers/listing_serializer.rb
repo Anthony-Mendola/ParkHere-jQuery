@@ -1,5 +1,5 @@
 class ListingSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :address, :image, :review_list, :longitude, :latitude, :cost, :contact 
+  attributes :id, :title, :content, :address, :contact, :cost, :review_list
   has_one :category
   has_one :user
 

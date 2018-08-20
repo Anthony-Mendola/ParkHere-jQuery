@@ -1,0 +1,13 @@
+<header class="main-header">
+  <div class="title">
+    <h1 class="header-h1">ParkHere</h1>
+    <h4 class="header-h4">Post your Listings</h4>
+      <br>
+      <% if current_user %>
+        <%= link_to "Create Your Listing", new_listing_path, class: "btn btn-default" %>
+      <% else %>
+        <%= link_to "Sign up to create your Listings", new_user_registration_path, class: "btn btn-default" %>
+      <% end %>
+  </div>
+</header>
+<div class="center jumbotron"></div>

@@ -2,15 +2,14 @@ class ReviewsController < ApplicationController
   before_action :set_listing
 
   def create
-    @review = current_user.reviews.create(review_params)
+    @review = current_user.reviews.new(review_params)
     @review.listing = @listing
     if @review.save
-    render json: @review, status: 201
+      render json: @review, status: 201
     else
       render json: {errors: @review.errors.full_messages}, status: 400
+    end
   end
-end
-
 
 
 
@@ -24,4 +23,3 @@ end
     params.require(:review).permit(:content)
   end
 end
-

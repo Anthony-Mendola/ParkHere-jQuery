@@ -1,18 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :owner?
-  def owner?(resource)
-    current_user && resource.user_id == current_user.id
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || root_path
   end
 
-  def authorize_user!(resource)
-    if !owner?(resource)
-      flash[:alert] = "You are not allowed to change someone else's #{resource.model_name.to_s.downcase}."
-      redirect_back(fallback_location: root_path)
-    end
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
+
 
 end
-
-#redirect_back is a new rails 5 method to deal with HTTP_REFERER not present error

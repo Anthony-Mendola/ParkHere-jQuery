@@ -1,0 +1,11 @@
+<div class="container">
+  <div id="userListingsInfo"class=" well col-sm-10">
+    <h4>Your ParkHere Listings:</h4>
+    <% @listings.each do |listing| %>
+      <p><%= link_to listing.title, listing_path(listing) %>
+      <div id="content-<%= listing.id %>"><%= listing.content.truncate(200) %>
+        <a href='#' data-id ="<%= listing.id %>" class='js-more'>More Info</a>
+      </div><br>
+    <% end %>
+  </div>
+</div>
