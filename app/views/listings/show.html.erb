@@ -6,8 +6,8 @@
     <h3>Title: <span class="listingTitle"><%=@listing.title%></span></h3>
     <p>Written by: <span class="listingUserName"><%= @listing.user.name %></span></p>
     <p>Location: <span class="listingLocation"><%=@listing.address%></span></p>
-    <p>Category Name: <span class="listingCategoryName"><%= @listing.category %></span></p>
-
+    <p>Category Name: <span class="listingCategoryName"><%= @listing.category.name %></span></p>
+   
 
     <p>Description: <span class="listingContent"><%=@listing.content%></span></p>
     <p>Recommendations: <span class="listingContact"><%=@listing.contact%></span></p><br>

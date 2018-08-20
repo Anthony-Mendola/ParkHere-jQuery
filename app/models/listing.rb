@@ -4,14 +4,15 @@ class Listing < ApplicationRecord
   has_many :reviews
   validates_presence_of :title, :content, :address
 
-  def category_attributes=(category_attributes)
-    category_attributes.values.each do |category_attribute|
-      if !category_attribute['name'].blank?
-        category = Category.find_or_create_by(category_attribute)
-        self.categories << category
-      end
-    end
-  end
+  #def category_attributes=(category_attributes)
+    #self.category = Category.where(:name => category_attributes[:name])
+    #category_attributes.values.each do |category_attribute|
+      #if !category_attribute['name'].blank?
+       # category = Category.find_or_create_by(category_attribute)
+        #self.categories << category
+     # end
+    #end
+  
 
   def next
     if next_dest = self.class.where("id > ?", id).first

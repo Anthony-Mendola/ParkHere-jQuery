@@ -10,7 +10,7 @@
     <%= listing_builder.text_field :address, class: 'form-control' %><br>
   </p>
 
-  <%= listing_builder.fields_for :category do |category_builder| %>
+  <%= listing_builder.fields_for :categories do |category_builder| %>
     <p><strong>Category Name</strong> <%= category_builder.text_field :name, class: 'form-control' %><br></p>
 
   <% end %>
