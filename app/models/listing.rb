@@ -13,18 +13,18 @@ class Listing < ApplicationRecord
      # end
     #end
   
-
+#uses an activerecord query "where" that grabs all the listings with an id greater than the listing thats calling it.
   def next
-    if next_dest = self.class.where("id > ?", id).first
-      next_dest
+    if next_listing = self.class.where("id > ?", id).first
+      next_listing
     else
       Listing.first
     end
   end
 
   def previous
-    if previous_dest = self.class.where("id < ?", id).last
-      previous_dest
+    if previous_listing = self.class.where("id < ?", id).last
+      previous_listing
     else
       Listing.last
     end

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  #calls the next_listing action in the listings controller
   get '/listings/:id/next', to: 'listings#next_listing'
 
   get '/listings/:id/previous', to: 'listings#previous_listing'
