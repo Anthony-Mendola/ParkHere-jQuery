@@ -7,6 +7,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application' %>
   </head>
+<%-# Rails helper that generates a script tag instructing the browser to load that JS file %>
+
 
   <body id="<%= controller_name %>-<%= action_name %>">
     <%= render 'layouts/navigation' %>

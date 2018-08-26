@@ -16,6 +16,7 @@
 
 //= require_tree .
 
+//Application locks if JavaScript is removed from this file and put into another
 $(function() {
   var listingArray = [];
   var id = parseInt($(".js-next").attr("data-id"));
@@ -32,7 +33,7 @@ $(function() {
       // promise
       .then(function(data) {
         listingArray = data;
-        $.each(listingArray, function(index, listing) {
+        $.each(listingArray, (index, listing) => {
           var listingData =
             "<p><a href='/listings/" +
             listing.id +
@@ -128,6 +129,7 @@ function Review(data) {
   this.user = data.user;
 }
 
+//cant use arrow functions for prototype functions
 Review.prototype.postReview = function() {
   var html = "";
   html +=
