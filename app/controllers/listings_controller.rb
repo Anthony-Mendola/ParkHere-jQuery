@@ -1,4 +1,7 @@
 class ListingsController < ApplicationController
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :next_listing, :previous_listing ]
+
+
   def index
     @listings = Listing.all
     respond_to do |format|
@@ -8,7 +11,6 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
     @category = @listing.category
     if current_user
       @review = current_user.reviews.build(listing: @listing)
@@ -20,13 +22,11 @@ class ListingsController < ApplicationController
   end
 
   def next_listing
-    @listing = Listing.find(params[:id])
     @next_listing = @listing.next
     render json: @next_listing
   end
 
   def previous_listing
-    @listing = Listing.find(params[:id])
     @previous_listing = @listing.previous
     render json: @previous_listing
   end
@@ -47,11 +47,9 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    @listing = Listing.find(params[:id])
   end
 
   def update
-    @listing = Listing.find(params[:id])
     if !current_user
       redirect_to new_user_session_path, alert: "You must be the owner to edit a listing."
     elsif current_user != @listing.user
@@ -63,7 +61,6 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    @listing = Listing.find(params[:id])
     if !current_user
       redirect_to new_user_session_path, alert: "You must be the owner to delete a listing."
     elsif current_user != @listing.user
@@ -80,4 +77,7 @@ class ListingsController < ApplicationController
     params.require(:listing).permit(:title, :address, :content, :contact, :cost, :category_id)
   end
 
+  def set_listing
+    @listing = Listing.find(params[:id])
+  end
 end
