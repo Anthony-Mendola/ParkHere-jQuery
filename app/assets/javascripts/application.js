@@ -17,10 +17,12 @@
 //= require_tree .
 
 //Application locks if JavaScript is removed from this file and put into another
-$(function () {
-  let listingArray = [];
-  let id = parseInt($(".js-next").attr("data-id"));
 
+$(function () {
+  //let listingArray = [];
+  //let id = parseInt($(".js-next").attr("data-id"));
+
+  //Loads listings on listing index page if a listing exists
   if ($("#listingsInfo").length) {
     loadAllListings();
   }
@@ -30,9 +32,10 @@ $(function () {
       url: "/listings.json",
       method: "GET"
     })
-      // promise
+      //promise "then" method which registers callback to receive data
       .then(function (data) {
         listingArray = data;
+        //iterates through elements, 1st callback function index, 2nd is the actual element
         $.each(listingArray, (index, listing) => {
           let listingData =
             "<p><a href='/listings/" +
@@ -52,17 +55,18 @@ $(function () {
       });
   }
 
-  // For the Listings index page
+  // For the Listings index page more info
   // can't use arrow functions in certain places due to formatting on save.
   $("#listingsInfo").on("click", ".js-more", function (e) {
     e.preventDefault();
     let id = this.dataset.id;
+    //this is our get request to rails api
     $.get("/listings/" + id + ".json", function (data) {
       $("#content-" + id).html(data.content);
     });
   });
 
-  // For the Users Listings Page
+  // For the Users Listings Page, more info
 
   $("#userListingsInfo").on("click", ".js-more", function (e) {
     e.preventDefault();
@@ -72,7 +76,7 @@ $(function () {
     });
   });
 
-  // For the Users Show Page
+  // For the Users Show Page, more info
 
   $("#userListingsShowInfo").on("click", ".js-more", function (e) {
     e.preventDefault();
