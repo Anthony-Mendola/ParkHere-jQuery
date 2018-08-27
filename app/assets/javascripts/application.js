@@ -133,7 +133,10 @@ function Review(data) {
 }
 
 //cant use arrow functions for prototype functions
+
 Review.prototype.postReview = function () {
+  //prototype method template
+  //this refers to object itself
   let html = "";
   html +=
     "<div class='well well-white' id='review-' + review.id + ''>" +
@@ -149,19 +152,24 @@ Review.prototype.postReview = function () {
 $(function () {
   $("form#new_review").on("submit", function (event) {
     event.preventDefault();
+    //"this" always refers to the item that triggered the event which is the form
     let $form = $(this);
     let action = $form.attr("action");
-    // To process the review(form data) it is converted from an object to a string.
+    // Serialize to process the review(form data) it is converted from an object to a string.
     let params = $form.serialize();
+    //Submit ajax request explicitly firing and asking for json back.
     $.ajax({
       url: action,
       data: params,
       dataType: "json",
       method: "POST"
+      //get back json object
     }).success(function (json) {
       $(".reviewBox").val("");
+      //transform json object into new Review object
       let review = new Review(json);
       review.postReview();
+      //calls method to append to DOM
     });
   });
 });
