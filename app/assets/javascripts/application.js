@@ -53,7 +53,7 @@ $(function () {
   }
 
   // For the Listings index page
-  // can't use arrow functions in certain places due to save with formatting.
+  // can't use arrow functions in certain places due to formatting on save.
   $("#listingsInfo").on("click", ".js-more", function (e) {
     e.preventDefault();
     let id = this.dataset.id;

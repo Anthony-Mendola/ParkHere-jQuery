@@ -10,11 +10,12 @@
     <%= listing_builder.text_field :address, class: 'form-control' %><br>
   </p>
 
-  <%= listing_builder.fields_for :categories do |category_builder| %>
-    <p><strong>Category Name</strong> <%= category_builder.text_field :name, class: 'form-control' %><br></p>
 
-  <% end %>
+  <p>
+  <%= listing_builder.label :Category %>
+  <%= listing_builder.collection_select :category_id, Category.all, :id, :name, :prompt => "Select One", :multiple => true, class: 'form-control' %><br></p>
 
+  
   <p>
     <%= listing_builder.label :content %>
     <%= listing_builder.text_area :content, rows: 10, class: 'form-control' %><br>
