@@ -20,8 +20,8 @@
 // can't use arrow functions in certain places due to formatting on save removing brackets
 
 $(function () {
-  //let listingArray = [];
-  //let id = parseInt($(".js-next").attr("data-id"));
+  let listingArray = [];
+  let id = parseInt($(".js-next").attr("data-id"));
 
   //Loads listings on listing index page if a listing exists
   if ($("#listingsInfo").length) {
@@ -36,6 +36,17 @@ $(function () {
       //promise "then" method which registers callback to receive data
       .then(function (data) {
         listingArray = data;
+        //listingArray.sort((a, b) => a.title - b.title);
+        // var sortArray = listingArray;
+        // sortArray.sort(function (a, b) {
+        //   if (a.title < b.title)
+        //     return -1;
+        //   if (a.title < b.title)
+        //     return 1;
+        //   return 0;
+        // });
+
+
         //iterates through elements, 1st callback function index, 2nd is the actual element
         $.each(listingArray, (index, listing) => {
           let listingData =
@@ -92,16 +103,58 @@ $(function () {
   // }
   // })
 
+  //sort divs alphabetically
+  // $(".js-sort").on("click", function (event) {
+  //   var orderDiv = $("#content-").sort(function (a, b) {
+  //     return $(a).find("#content-").text().toLowerCase() >
+  //       $(b).find("#content-").text().toLowerCase();
+  //     var container = $(".toempty");
+  //     container.detach().empty().append(orderDiv);
+  //     $('body').append(container);
+  //   })
+  //   // $(".toempty").html(orderDiv)
+  //   event.preventDefault();
+  // });
+
+  $(".js-sort").on("click", function (event) {
+    var sortByProperty = function (property) {
+      return function (x, y) {
+        return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+      };
+    };
+    var alphaSort = listingArray.sort(sortByProperty('title'));
+    console.log(alphaSort)
+    $.each(alphaSort, (index, listing) => {
+      let sortData =
+        "<p><a href='/listings/" +
+        listing.id +
+        "'>" +
+        listing.title +
+        "</a><div id='content-" +
+        listing.id +
+        "'>" +
+        listing.content.substring(0, 250) +
+        "..." +
+        "<a href='#' data-id='" +
+        listing.id +
+        "' class='js-more'>More Info</a></div><br>";
+      var container = $("#listingsInfo")
+      container.detach().empty();
+      $("#listingsSort").append(sortData)
+    });
+    event.preventDefault();
+  });
+
 
   //Puts listing in order
-  $("#listingsInfo").on("click", ".js-order", function (e) {
-    e.preventDefault();
-    let id = this.dataset.id;
-    //this is our get request to rails api
-    $.get("/listings/" + id + ".json", function (data) {
-      $("#content-" + id).html(data.content);
-    });
-  });
+  // $("#listingsInfo").on("click", ".js-order", function (e) {
+  //   e.preventDefault();
+  //   let id = this.dataset.id;
+  //   //this is our get request to rails api
+  //   $.get("/listings/" + id + ".json", function (data) {
+  //     $("#content-" + id).html(data.content);
+  //   });
+  // });
 
 
   // For the Users Listings Page, more info
