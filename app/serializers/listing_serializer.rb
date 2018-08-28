@@ -3,6 +3,8 @@ class ListingSerializer < ActiveModel::Serializer
   has_one :category
   has_one :user
 
+
+  #serializer to allow each review to have its own user_id
   def review_list
     object.reviews.map do |review|
       {

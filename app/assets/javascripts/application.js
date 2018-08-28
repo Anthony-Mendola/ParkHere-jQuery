@@ -17,6 +17,7 @@
 //= require_tree .
 
 //Application locks if JavaScript is removed from this file and put into another
+// can't use arrow functions in certain places due to formatting on save removing brackets
 
 $(function () {
   //let listingArray = [];
@@ -52,11 +53,11 @@ $(function () {
             "' class='js-more'>More Info</a></div><br>";
           $("#listingsInfo").append(listingData);
         });
+
       });
   }
 
   // For the Listings index page more info
-  // can't use arrow functions in certain places due to formatting on save.
   $("#listingsInfo").on("click", ".js-more", function (e) {
     e.preventDefault();
     let id = this.dataset.id;
@@ -65,6 +66,43 @@ $(function () {
       $("#content-" + id).html(data.content);
     });
   });
+
+
+  //replace instead of append existing data
+  // $("#listingsInfo").on("click", ".js-sort", function (e) {
+  //   e.preventDefault()
+  //   $.get("/listings/" + id + ".json", function (data) {
+  //     console.log(data);
+  //     loadAllListings(data);
+  //   }
+  //   data.sort(function (a, b) {
+  //       var titleA = a.title.toUpperCase(); // ignore upper and lowercase
+  //       var titleB = b.title.toUpperCase(); // ignore upper and lowercase
+  //       if (titleA < titleB) {
+  //         return -1;
+  //       }
+  //       if (titleA > titleB) {
+  //         return 1;
+  //       }
+
+  //       // titles must be equal
+  //       return 0;
+  //     })
+
+  // }
+  // })
+
+
+  //Puts listing in order
+  $("#listingsInfo").on("click", ".js-order", function (e) {
+    e.preventDefault();
+    let id = this.dataset.id;
+    //this is our get request to rails api
+    $.get("/listings/" + id + ".json", function (data) {
+      $("#content-" + id).html(data.content);
+    });
+  });
+
 
   // For the Users Listings Page, more info
 
@@ -92,14 +130,15 @@ $(function () {
     let listingReviewPath = "/listings/" + data.id + "/reviews/";
     $("#new_review").attr("action", listingReviewPath);
     $(".listingTitle").text(data["title"]);
-    $(".listingUserName").text(data["user"]["name"]);
+    $(".listingUserName").text(data["user"]["title"]);
     $(".listingLocation").text(data["address"]);
-    $(".listingCategoryName").text(data["category"]["name"]);
+    $(".listingCategoryName").text(data["category"]["title"]);
     $(".listingContact").text(data["contact"]);
     $(".listingContent").text(data["content"]);
     $(".listingCost").text(data["cost"]);
     $(".js-next").attr("data-id", data["id"]);
     $(".js-previous").attr("data-id", data["id"]);
+    //clears reviews for next listing and allows review to be appended without a refresh.
     $("#submitted-reviews").empty();
     data["review_list"].forEach(function (element) {
       let review = new Review(element);
@@ -126,10 +165,18 @@ $(function () {
   });
 });
 
-function Review(data) {
-  this.id = data.id;
-  this.content = data.content;
-  this.user = data.user;
+// function Review(data) {
+//   this.id = data.id;
+//   this.content = data.content;
+//   this.user = data.user;
+// }
+
+class Review {
+  constructor(data) {
+    this.id = data.id;
+    this.content = data.content;
+    this.user = data.user;
+  }
 }
 
 //cant use arrow functions for prototype functions
@@ -141,7 +188,7 @@ Review.prototype.postReview = function () {
   html +=
     "<div class='well well-white' id='review-' + review.id + ''>" +
     "<strong>" +
-    this.user.name +
+    this.user.title +
     "</strong>" +
     " says: " +
     this.content +
