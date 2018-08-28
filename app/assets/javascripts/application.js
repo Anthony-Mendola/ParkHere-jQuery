@@ -36,15 +36,6 @@ $(function () {
       //promise "then" method which registers callback to receive data
       .then(function (data) {
         listingArray = data;
-        //listingArray.sort((a, b) => a.title - b.title);
-        // var sortArray = listingArray;
-        // sortArray.sort(function (a, b) {
-        //   if (a.title < b.title)
-        //     return -1;
-        //   if (a.title < b.title)
-        //     return 1;
-        //   return 0;
-        // });
 
 
         //iterates through elements, 1st callback function index, 2nd is the actual element
@@ -69,7 +60,7 @@ $(function () {
   }
 
   // For the Listings index page more info
-  $("#listingsInfo").on("click", ".js-more", function (e) {
+  $("#listingsInfo, #listingsSort").on("click", ".js-more", function (e) {
     e.preventDefault();
     let id = this.dataset.id;
     //this is our get request to rails api
@@ -116,10 +107,11 @@ $(function () {
   //   event.preventDefault();
   // });
 
+  // alphabetical sorting button
   $(".js-sort").on("click", function (event) {
     var sortByProperty = function (property) {
       return function (x, y) {
-        return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+        return ((x[property]["toUpperCase"]() === y[property]["toUpperCase"]()) ? 0 : ((x[property]["toUpperCase"]() > y[property]["toUpperCase"]()) ? 1 : -1));
       };
     };
     var alphaSort = listingArray.sort(sortByProperty('title'));
